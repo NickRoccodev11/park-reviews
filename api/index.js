@@ -12,7 +12,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.use("/auth", require("./auth"));
-router.use("/api", require("./api"));
+router.use("/user", require("./user"));
+router.use("/park", require("./park"));
 
 module.exports = router;
