@@ -1,5 +1,5 @@
-const { prisma } = require("./index");
-const { faker } = require("@faker-js/faker");
+const { prisma } = require("./index.cjs");
+const  { faker } = require("@faker-js/faker");
 
 const fetchParks = async () => {
   try {
