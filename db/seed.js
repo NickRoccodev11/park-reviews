@@ -1,4 +1,4 @@
-const { prisma } = require("./index.cjs");
+const { prisma } = require("./index.js");
 const { faker } = require("@faker-js/faker");
 
 const fetchParks = async () => {
@@ -19,10 +19,6 @@ const fetchParks = async () => {
   }
 };
 
-//create new tags
-//create users
-//create reviews
-//add comments
 
 const createPark = async () => {
   const { data } = await fetchParks();
@@ -39,6 +35,7 @@ const createPark = async () => {
     });
   }
 };
+
 const createUser = async (
   email,
   username,
