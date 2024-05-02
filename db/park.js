@@ -9,6 +9,24 @@ const getAllParks = async () => {
   return allParks;
 };
 
+const getParkDetails = async (id) => {
+  try {
+    const parkDetails = await prisma.park.findUnique({
+      where: {
+        id: parseInt(id),
+      }, 
+      include: {
+        Review: true,
+      }
+    });
+    return parkDetails;
+  } catch (error) {
+    console.error(`error fetching park details for ID${id}: ${error}`);
+    throw error;
+  }
+};
+
 module.exports = {
   getAllParks,
+  getParkDetails,
 };

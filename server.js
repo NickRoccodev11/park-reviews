@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, "./dist")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.use("/", require("./routes/index.js"));
 
 app.listen(PORT, () => {
