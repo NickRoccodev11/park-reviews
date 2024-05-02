@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const { registerUser } = require("../db/user");
 
 router.post("/register", async (req, res) => {
-  console.log("made it here")
   try {
     const newUser = await registerUser(
       req.body.email,
