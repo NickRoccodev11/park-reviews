@@ -21,7 +21,7 @@ const Parks = ({ allParks }) => {
     <div>
       {
         isAdmin &&
-        <div>
+        <div className="admin-card">
         <h4>Logged in as Admin</h4>
         <label>See all Users:</label><br />
         <button onClick={() => navigate('/users')}>click here</button>

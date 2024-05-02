@@ -30,3 +30,10 @@ nav {
   margin: 20px;
   padding: 10px;
 }
+
+.admin-card {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 20px;
+  width: 200px;
+}
