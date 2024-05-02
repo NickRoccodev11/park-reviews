@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Parks from './components/Parks';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -22,6 +23,8 @@ function App() {
   }, [])
   return (
     <>
+    <Navbar/>
+    <h1>Rate-A-Park</h1>
       <Routes>
         <Route path="/" element={<Parks allParks={allParks} />} />
         <Route path="/" element={<Register />} />
