@@ -1,14 +1,16 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 const { registerUser } = require("../db/user");
-router.get("/register", async (req, res) => {
+
+router.post("/register", async (req, res) => {
+  console.log("made it here")
   try {
     const newUser = await registerUser(
-      email,
-      username,
-      password,
-      first_name,
-      last_name
+      req.body.email,
+      req.body.username,
+      req.body.password,
+      req.body.firstName,
+      req.body.lastName
     );
     const token = jwt.sign({ id: newUser.id }, process.env.JWT);
     res.status(201).send({ newUser, token });
