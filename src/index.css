@@ -1,0 +1,10 @@
+img {
+  width: 300px;
+}
+
+.single-park {
+  border: 2px solid black;
+  width: 350px;
+  margin: 20px;
+  padding: 20px;
+}
