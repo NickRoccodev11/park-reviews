@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 
 function App() {
   const [allParks, setAllParks] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     const fetchAllParks = async () => {
@@ -27,7 +28,7 @@ function App() {
       <h1>Rate-A-Park</h1>
       <Routes>
         <Route path="/" element={<Parks allParks={allParks} />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register setIsAdmin={setIsAdmin} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
