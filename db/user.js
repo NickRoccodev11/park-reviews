@@ -39,4 +39,4 @@ const loginUser = async (username, password) => {
   }
 };
 
-module.exports = { registerUser };
+module.exports = { registerUser, loginUser };
