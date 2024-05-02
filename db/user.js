@@ -24,4 +24,19 @@ const registerUser = async (
   }
 };
 
+
+const loginUser = async (username, password) => {
+  try {
+    const loggedUser = await prisma.user.findFirst({
+      where: {
+        username,
+        password,
+      },
+    });
+   return loggedUser
+  } catch (error) {
+    console.error("error finding user", error)
+  }
+};
+
 module.exports = { registerUser };
