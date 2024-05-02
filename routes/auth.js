@@ -1,8 +1,20 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 
-router.get("/", async (req, res) => {
-  console.log("delete me after adding a route");
+router.get("/register", async (req, res) => {
+  try {
+    const newUser = await registerUser(
+      email,
+      username,
+      password,
+      first_name,
+      last_name
+    );
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT);
+    res.status(201).send({ newUser, token });
+  } catch (error) {
+    console.error("error on POST /auth/register route", error)
+  }
 });
 
 
