@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-const { registerUser, loginUser } = require("../db/user");
+const { registerUser, loginUser, getAllUsers } = require("../db/user");
 
 router.post("/register", async (req, res) => {
   try {
@@ -31,5 +31,14 @@ router.post("/login", async (req, res) => {
     console.error("error on POST /auth/register route", error);
   }
 });
+
+router.get('/users', async(req,res)=>{
+  try {
+    const allUsers = await getAllUsers()
+    res.status(200).send(allUsers)
+  } catch (error) {
+    console.error("error on GET auth/users route", error)
+  }
+})
 
 module.exports = router;
