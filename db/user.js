@@ -24,7 +24,6 @@ const registerUser = async (
   }
 };
 
-
 const loginUser = async (username, password) => {
   try {
     const loggedUser = await prisma.user.findFirst({
@@ -33,10 +32,23 @@ const loginUser = async (username, password) => {
         password,
       },
     });
-   return loggedUser
+    return loggedUser;
   } catch (error) {
-    console.error("error finding user", error)
+    console.error("error finding user", error);
   }
 };
 
-module.exports = { registerUser, loginUser };
+const getReviewsByUser = async (id) => {
+  try {
+    const userReviews = await prisma.review.findMany({
+      where: {
+        user_id: id,
+      },
+    });
+    return userReviews
+  } catch (error) {
+    console.error("error getting user reviews from db", error)
+  }
+};
+
+module.exports = { registerUser, loginUser, getReviewsByUser };
