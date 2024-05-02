@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
+const { getAllParks } = require("../db/park.js");
 
 router.get("/parks", async (req, res) => {
   try {
@@ -9,3 +9,5 @@ router.get("/parks", async (req, res) => {
     console.error("error on GET /parks route", error);
   }
 });
+
+module.exports = router;
