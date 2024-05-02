@@ -5,7 +5,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {
-    e.prevent.default;
+    e.preventDefault();
     try {
       const result = await fetch('http://localhost:3000/auth/login', {
         method: 'POST',
@@ -19,7 +19,7 @@ const Login = () => {
       })
       const LoggedUserData = await result.json();
       if (LoggedUserData.token) {
-        sessionStorage.setItem("token", token)
+        sessionStorage.setItem("token", LoggedUserData.token)
       }
     } catch (error) {
       console.error("error on login fetch", error)
@@ -39,7 +39,7 @@ const Login = () => {
         /><br />
         <label >Password</label><br />
         <input
-          type="text"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
