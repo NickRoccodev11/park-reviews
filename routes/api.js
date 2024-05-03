@@ -13,7 +13,7 @@ router.get("/parks", async (_req, res) => {
 
 
 router.get("/parks/:id", async (req, res) => {
-  console.log("api");
+  
   try {
     const { id } = req.params;
     const parkDetails = await getParkDetails(id);

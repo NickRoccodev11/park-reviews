@@ -10,7 +10,7 @@ const getAllParks = async () => {
 };
 
 const getParkDetails = async (id) => {
-  console.log("park");
+  
   try {
     const parkDetails = await prisma.park.findUnique({
       where: {

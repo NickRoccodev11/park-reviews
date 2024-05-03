@@ -7,7 +7,7 @@ const ParkDetails = () => {
   const [park, setPark] = useState(null);
 
   useEffect(() =>{
-    console.log("useEffect")
+    
     const fetchParkDetails = async () => {
       try{
         const response = await fetch(`/api/parks/${parkId}`);
