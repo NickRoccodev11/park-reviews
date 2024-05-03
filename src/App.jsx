@@ -5,11 +5,11 @@ import Parks from './components/Parks';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import Users from './components/Users';
 
 function App() {
   const [allParks, setAllParks] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false)
-
+ 
   useEffect(() => {
     const fetchAllParks = async () => {
       try {
@@ -31,6 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </>
   )

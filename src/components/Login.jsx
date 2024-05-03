@@ -21,6 +21,11 @@ const Login = () => {
       if (LoggedUserData.token) {
         sessionStorage.setItem("token", LoggedUserData.token)
       }
+      if(LoggedUserData.loggedUser.is_admin){
+        sessionStorage.setItem("role", "admin")
+      }else{
+        sessionStorage.setItem("role", "user")
+      }
     } catch (error) {
       console.error("error on login fetch", error)
     }
