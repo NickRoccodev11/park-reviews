@@ -5,6 +5,7 @@ import Parks from './components/Parks';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import ParkDetails from './components/ParkDetails';
 
 function App() {
   const [allParks, setAllParks] = useState([]);
@@ -31,9 +32,10 @@ function App() {
         <Route path="/register" element={<Register setIsAdmin={setIsAdmin} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/:parkId" element={<ParkDetails />} />
       </Routes>
     </>
   )
 }
 
-export default App
+export default App;
