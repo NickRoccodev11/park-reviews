@@ -77,4 +77,4 @@ const updateReview = async (userId, parkId) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getReviewsByUser, getAllUsers };
+module.exports = { registerUser, loginUser, getReviewsByUser, getAllUsers, updateReview };

@@ -1,8 +1,13 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 
-const { registerUser, loginUser, getAllUsers, getReviewsByUser } = require("../db/user");
-
+const {
+  registerUser,
+  loginUser,
+  getAllUsers,
+  getReviewsByUser,
+  updateReview,
+} = require("../db/user");
 
 router.post("/register", async (req, res) => {
   try {
@@ -34,15 +39,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-router.get('/users', async(req,res)=>{
+router.get("/users", async (req, res) => {
   try {
-    const allUsers = await getAllUsers()
-    res.status(200).send(allUsers)
+    const allUsers = await getAllUsers();
+    res.status(200).send(allUsers);
   } catch (error) {
-    console.error("error on GET auth/users route", error)
+    console.error("error on GET auth/users route", error);
   }
-})
+});
 
 router.get("/reviews", async (req, res) => {
   if (req.user) {
@@ -58,5 +62,19 @@ router.get("/reviews", async (req, res) => {
   }
 });
 
+router.put("/reviews/:id", async (req, res) => {
+  if (req.user) {
+    try {
+      const updatedReview = updateReview(req.user.id, req.params.id);
+      if (updateReview) {
+        res.status(200).send(updatedReview);
+      } else {
+        res.status(400).send({ msg: "review not found" });
+      }
+    } catch (error) {
+      console.error("error on PUT /reviews/:id route", error);
+    }
+  }
+});
 
 module.exports = router;
