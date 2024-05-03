@@ -17,7 +17,7 @@
     "preview": "vite preview",
     "start": "nodemon ./server.js",
     "seed:dev": "npx prisma migrate dev --name init && ./db/seed.js",
-    "seed":"npx prisma migrate && ./db/seed.js"
+    "seed":"npx prisma migrate deploy status resolve && node ./db/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
