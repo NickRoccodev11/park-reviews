@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-const Register = ({ setIsAdmin }) => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("")
@@ -27,20 +27,10 @@ const Register = ({ setIsAdmin }) => {
       const userData = await result.json()
       console.log("before session storage")
       if (userData.token) {
-        console.log("inside session storage")
         sessionStorage.setItem('token', userData.token)
-        console.log("after sesssion storage")
       } else {
         console.log("error registering", userData)
       }
-      console.log("beofre adim")
-      if (userData.is_admin) {
-        console.log("inside adim")
-        setIsAdmin(true)
-      } else {
-        setIsAdmin(false)
-      }
-      console.log("after adim")
     } catch (error) {
       console.error("error registering user", error)
     }
