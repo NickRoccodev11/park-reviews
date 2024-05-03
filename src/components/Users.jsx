@@ -5,7 +5,7 @@ const Users = () => {
 
   useEffect(() => {
     const fetchAllUsers = async () => {
-      const result = await fetch('http://localhost:3000/auth/users')
+      const result = await fetch('/auth/users')
       const userData = await result.json()
       setAllUsers(userData)
     }
