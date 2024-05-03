@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
-const { registerUser, loginUser, getAllUsers } = require("../db/user");
+
+const { registerUser, loginUser, getAllUsers, getReviewsByUser } = require("../db/user");
+
 
 router.post("/register", async (req, res) => {
   try {
@@ -32,6 +34,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+
 router.get('/users', async(req,res)=>{
   try {
     const allUsers = await getAllUsers()
@@ -40,5 +43,20 @@ router.get('/users', async(req,res)=>{
     console.error("error on GET auth/users route", error)
   }
 })
+
+router.get("/reviews", async (req, res) => {
+  if (req.user) {
+    try {
+      const userReviews = await getReviewsByUser(req.user.id);
+      console.log(userReviews);
+      res.status(200).send(userReviews);
+    } catch (error) {
+      console.error("error on GET auth/reviews route");
+    }
+  } else {
+    res.status(401).send({ msg: "you must be signed in to get your reviews" });
+  }
+});
+
 
 module.exports = router;

@@ -27,7 +27,9 @@ const Register = () => {
       const userData = await result.json()
       if (userData.token) {
         sessionStorage.setItem('token', userData.token)
+
         sessionStorage.setItem('role', 'user')
+
       } else {
         console.log("error registering, no token recieved", userData)
       }
