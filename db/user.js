@@ -63,13 +63,15 @@ const getReviewsByUser = async (id) => {
   }
 };
 
-const updateReview = async (userId, parkId) => {
+const updateReview = async (userId, parkId, id, updateData) => {
   try {
     const updatedReview = await prisma.review.update({
       where: {
+        id,
         user_id: userId,
         park_id: parkId,
       },
+      data: updateData,
     });
     return updatedReview;
   } catch (error) {
@@ -77,4 +79,10 @@ const updateReview = async (userId, parkId) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getReviewsByUser, getAllUsers, updateReview };
+module.exports = {
+  registerUser,
+  loginUser,
+  getReviewsByUser,
+  getAllUsers,
+  updateReview,
+};

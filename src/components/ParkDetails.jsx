@@ -22,7 +22,7 @@ const ParkDetails = () => {
   }, []);
 
   if (!park) return <div>Loading...</div>;
-console.log(park)
+
   return (
 
   <div>

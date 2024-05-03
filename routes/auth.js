@@ -52,7 +52,6 @@ router.get("/reviews", async (req, res) => {
   if (req.user) {
     try {
       const userReviews = await getReviewsByUser(req.user.id);
-      console.log(userReviews);
       res.status(200).send(userReviews);
     } catch (error) {
       console.error("error on GET auth/reviews route");
@@ -65,12 +64,19 @@ router.get("/reviews", async (req, res) => {
 router.put("/reviews/:id", async (req, res) => {
   if (req.user) {
     try {
-      const updatedReview = updateReview(req.user.id, req.params.id);
-      if (updateReview) {
-        res.status(200).send(updatedReview);
-      } else {
-        res.status(400).send({ msg: "review not found" });
+      let updateData = {};
+      for (key in req.body) {
+        if (key === "title" || key === "content" || key === "stars") {
+          updateData[key] = req.body[key];
+        }
       }
+      const updatedReview = await updateReview(
+        req.user.id,
+        parseInt(req.params.id),
+        req.body.id,
+        updateData
+      );
+      res.status(200).send(updatedReview);
     } catch (error) {
       console.error("error on PUT /reviews/:id route", error);
     }

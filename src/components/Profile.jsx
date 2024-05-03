@@ -33,7 +33,7 @@ const Profile = () => {
       }
     }
     fetchUserReviews()
-  },[token])
+  }, [token])
 
   return (
     <div className='profile'>
@@ -42,8 +42,12 @@ const Profile = () => {
           <>
             <h1>My Reviews</h1>
             {
-              userReviews.map(review=>{
-                return <UserReview review={review} />
+              userReviews.map(review => {
+                return <UserReview
+                  token={token}
+                  review={review}
+                  setUserReviews={setUserReviews}
+                />
               })
             }
           </> :
