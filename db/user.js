@@ -44,10 +44,13 @@ const getReviewsByUser = async (id) => {
       where: {
         user_id: id,
       },
+      include: {
+        park: true,
+      },
     });
-    return userReviews
+    return userReviews;
   } catch (error) {
-    console.error("error getting user reviews from db", error)
+    console.error("error getting user reviews from db", error);
   }
 };
 

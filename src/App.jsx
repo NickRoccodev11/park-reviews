@@ -28,7 +28,7 @@ function App() {
       <h1>Rate-A-Park</h1>
       <Routes>
         <Route path="/" element={<Parks allParks={allParks} />} />
-        <Route path="/register" element={<Register setIsAdmin={setIsAdmin} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

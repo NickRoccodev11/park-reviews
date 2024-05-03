@@ -36,6 +36,7 @@ router.get("/reviews", async (req, res) => {
   if (req.user) {
     try {
       const userReviews = await getReviewsByUser(req.user.id);
+      console.log(userReviews);
       res.status(200).send(userReviews);
     } catch (error) {
       console.error("error on GET auth/reviews route");
