@@ -16,7 +16,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "nodemon ./server.js",
-    "seed": "npx prisma migrate dev --name init && ./db/seed.js"
+    "seed:dev": "npx prisma migrate dev --name init && ./db/seed.js",
+    "seed": "npx prisma migrate && node ./db/seed.js "
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",
