@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const fetchAllParks = async () => {
       try {
-        const result = await fetch('http://localhost:3000/api/parks');
+        const result = await fetch('/api/parks');
         const allParkData = await result.json();
         setAllParks(allParkData);
       } catch (error) {

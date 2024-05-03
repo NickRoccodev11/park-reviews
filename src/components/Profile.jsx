@@ -19,7 +19,7 @@ const Profile = () => {
     const fetchUserReviews = async () => {
       if (token) {
         try {
-          const result = await fetch('http://localhost:3000/auth/reviews', {
+          const result = await fetch('/auth/reviews', {
             headers: {
               'Content-Type': 'application/json',
               "Authorization": `Bearer ${token}`
