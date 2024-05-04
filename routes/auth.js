@@ -7,7 +7,8 @@ const {
   getAllUsers,
   getReviewsByUser,
   updateReview,
-  deleteReview
+  deleteReview,
+  getCommentsByUser
 } = require("../db/user");
 
 router.post("/register", async (req, res) => {
@@ -92,5 +93,18 @@ router.delete("/reviews/:id", async (req, res) => {
     console.error("error on DELETE /reviews/:id route", error);
   }
 });
+
+router.get("/comments/:id", async(req,res)=>{
+try {
+  const userComments = await getCommentsByUser(parseInt(req.params.id))
+  if(userComments){
+    res.status(200).send(userComments)
+  }else{
+    res.status(404).send({msg:"no comments found for that user"})
+  }
+} catch (error) {
+  console.error("error on GET auth/comments/:id route",error)
+}
+})
 
 module.exports = router;
