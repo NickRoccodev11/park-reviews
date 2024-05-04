@@ -38,10 +38,11 @@ const Profile = () => {
   return (
     <div className='profile'>
       {
-        token ?
+        token  ?
           <>
             <h1>My Reviews</h1>
             {
+             userReviews && userReviews.length > 0 ? (
               userReviews.map(review => {
                 return <UserReview
                   token={token}
@@ -49,6 +50,9 @@ const Profile = () => {
                   setUserReviews={setUserReviews}
                 />
               })
+            ): (
+              <p>no reviews written yet!</p>
+            )
             }
           </> :
           <>

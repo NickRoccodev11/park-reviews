@@ -79,10 +79,29 @@ const updateReview = async (userId, parkId, id, updateData) => {
   }
 };
 
+const deleteReview = async (id) => {
+  try {
+    await prisma.comment.deleteMany({
+      where: {
+        review_id: id,
+      },
+    });
+    const deletedReview = await prisma.review.delete({
+      where: {
+        id,
+      },
+    });
+    return deletedReview;
+  } catch (error) {
+    console.error("error deleting review from db", error);
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getReviewsByUser,
   getAllUsers,
   updateReview,
+  deleteReview
 };
