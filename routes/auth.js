@@ -7,6 +7,7 @@ const {
   getAllUsers,
   getReviewsByUser,
   updateReview,
+  deleteReview
 } = require("../db/user");
 
 router.post("/register", async (req, res) => {
@@ -80,6 +81,15 @@ router.put("/reviews/:id", async (req, res) => {
     } catch (error) {
       console.error("error on PUT /reviews/:id route", error);
     }
+  }
+});
+
+router.delete("/reviews/:id", async (req, res) => {
+  try {
+    const deletedReview = await deleteReview(parseInt(req.params.id));
+    res.status(200).send(deletedReview);
+  } catch (error) {
+    console.error("error on DELETE /reviews/:id route", error);
   }
 });
 
