@@ -6,6 +6,7 @@ import UserReview from './UserReview'
 const Profile = () => {
   const [token, setToken] = useState('')
   const [userReviews, setUserReviews] = useState([])
+  const [userComments, setUserComments] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,27 +33,45 @@ const Profile = () => {
         }
       }
     }
-    fetchUserReviews()
+    const fetchUserComments = async () => {
+      if (token) {
+        try {
+          const result = await fetch('auth/comments', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "Authorization": `Bearer ${token}`
+            }
+          })
+          const commentData = await result.json()
+          setUserComments(commentData)
+        } catch (error) {
+          console.error("error fetching user comments", error)
+        }
+      }
+    }
+    fetchUserReviews();
+    fetchUserComments();
   }, [token])
 
   return (
     <div className='profile'>
       {
-        token  ?
+        token ?
           <>
             <h1>My Reviews</h1>
             {
-             userReviews && userReviews.length > 0 ? (
-              userReviews.map(review => {
-                return <UserReview
-                  token={token}
-                  review={review}
-                  setUserReviews={setUserReviews}
-                />
-              })
-            ): (
-              <p>no reviews written yet!</p>
-            )
+              userReviews && userReviews.length > 0 ? (
+                userReviews.map(review => {
+                  return <UserReview
+                    token={token}
+                    review={review}
+                    setUserReviews={setUserReviews}
+                  />
+                })
+              ) : (
+                <p>no reviews written yet!</p>
+              )
             }
           </> :
           <>
@@ -61,6 +80,7 @@ const Profile = () => {
             <button onClick={() => navigate('/login')}>Go To Login</button>
           </>
       }
+
     </div>
   )
 }
