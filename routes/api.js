@@ -46,7 +46,6 @@ router.post ("/parks", async (req, res) => {
 });
 
 router.post ("/reviews", async (req, res) =>{
-  console.log("end point")
   if (req.user) {
     try {
       const newReview = await createReview(

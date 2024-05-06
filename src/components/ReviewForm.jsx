@@ -22,7 +22,7 @@ const ReviewForm = ({ park, token }) => {
         }),
       });
       const newReview = await result.json();
-      console.log(newReview);
+    
     } catch (error) {
       console.error("Failed to submit review:", error);
     }
