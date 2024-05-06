@@ -117,21 +117,34 @@ const getCommentsByUser = async (user_id) => {
   }
 };
 
-const editComment = async (id,content)=>{
+const editComment = async (id, content) => {
   try {
     const editedComment = await prisma.comment.update({
-      where:{
-        id
+      where: {
+        id,
       },
-      data:{
-        content
-      }
-    })
-    return editedComment
+      data: {
+        content,
+      },
+    });
+    return editedComment;
   } catch (error) {
-    console.error("error updating a comment in db", error)
+    console.error("error updating a comment in db", error);
   }
-}
+};
+
+const deleteComment = async (id) => {
+  try {
+    const deletedComment = await prisma.comment.delete({
+      where: {
+        id,
+      },
+    });
+    return deletedComment;
+  } catch (error) {
+    console.error("error deleting comment from db", error);
+  }
+};
 
 module.exports = {
   registerUser,
@@ -141,5 +154,6 @@ module.exports = {
   updateReview,
   deleteReview,
   getCommentsByUser,
-  editComment
+  editComment,
+  deleteComment,
 };
