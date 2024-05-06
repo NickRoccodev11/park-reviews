@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { getAllParks, getParkDetails } = require("../db/park.js");
+const { getAllParks, getParkDetails, createPark } = require("../db/park.js");
 const { default: CreatePark } = require("../src/components/CreatePark.jsx");
 
 router.get("/parks", async (_req, res) => {
