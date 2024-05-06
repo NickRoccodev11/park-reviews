@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const ParkDetails = () => {
   const {parkId} = useParams();
   const [park, setPark] = useState(null);
-
+  const [showReviewForm, setShowReviewForm] = useState(false);
   useEffect(() =>{
     
     const fetchParkDetails = async () => {
@@ -26,13 +26,18 @@ const ParkDetails = () => {
   return (
 
   <div>
-    <p>Hello</p>
     <h1>{park.name}</h1>
     <img src={park.image} alt={park.name} />
     <p>State: {park.state}</p>
     <p>Description: {park.description}</p>
     <p>Contact: {park.contact}</p>
     <p>Hours: {park.hours}</p>
+    <button onClick={()=>setShowReviewForm(true)}>Leave a Review</button>
+    {
+      showReviewForm && 
+      <ReviewForm  park = {park} /> 
+
+    }
     <h2> Reviews </h2>
     {
       park.Review.map(review => {
