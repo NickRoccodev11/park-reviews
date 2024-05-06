@@ -1,10 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import ReviewForm from "./ReviewForm";
+
 
 
 const ParkDetails = () => {
   const {parkId} = useParams();
   const [park, setPark] = useState(null);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+const [token, setToken] = useState("");
+  useEffect(() => {
+    const sessionToken = sessionStorage.getItem('token');
+    if (sessionToken) {
+      setToken(sessionToken)
+    }
+  }, [])
 
   useEffect(() =>{
     
@@ -26,13 +36,21 @@ const ParkDetails = () => {
   return (
 
   <div>
-    <p>Hello</p>
     <h1>{park.name}</h1>
     <img src={park.image} alt={park.name} />
     <p>State: {park.state}</p>
     <p>Description: {park.description}</p>
     <p>Contact: {park.contact}</p>
     <p>Hours: {park.hours}</p>
+    <button onClick={()=>setShowReviewForm(true)}>Leave a Review</button>
+    {
+      showReviewForm && 
+      <ReviewForm  
+      park={park}
+      token={token}
+      /> 
+
+    }
     <h2> Reviews </h2>
     {
       park.Review.map(review => {

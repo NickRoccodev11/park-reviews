@@ -47,8 +47,28 @@ const createPark = async (
    }
 };
 
+const createReview = async (title, content, stars, user_id, park_id) => {
+  console.log("db")
+  try {
+    const newReview = await prisma.review.create({
+      data:{
+        title, 
+        content, 
+        stars, 
+        user_id, 
+        park_id
+      }
+    }) 
+    console.log(newReview)
+    return newReview;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 module.exports = {
   getAllParks,
   getParkDetails,
   createPark,
+  createReview
 };
