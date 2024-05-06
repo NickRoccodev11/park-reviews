@@ -27,7 +27,28 @@ const getParkDetails = async (id) => {
   }
 };
 
+const createPark = async (
+  name, description, contact, state, image, hours
+) => {
+   try {
+    const newPark = prisma.park.create({
+      data:{
+        name,
+        description,
+        contact, 
+        state, 
+        image, 
+        hours
+      }
+    })
+    return newPark;
+   } catch (error) {
+    console.error(error);    
+   }
+};
+
 module.exports = {
   getAllParks,
   getParkDetails,
+  createPark,
 };

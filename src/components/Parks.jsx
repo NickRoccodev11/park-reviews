@@ -2,10 +2,12 @@ import { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import SinglePark from "./SinglePark"
 import Searchbar from "./Searchbar"
+import CreatePark from "./CreatePark"
 
 const Parks = ({ allParks }) => {
   const [filterText, setFilterText] = useState("")
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin, setAdminData] = useState(false)
+  const [showCreateParkForm, setShowCreateParkForm] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,16 +24,23 @@ const Parks = ({ allParks }) => {
       {
         isAdmin &&
         <div className="admin-card">
-        <h4>Logged in as Admin</h4>
-        <label>See all Users:</label><br />
-        <button onClick={() => navigate('/users')}>click here</button>
-      </div>
+          <h4>Logged in as Admin</h4>
+          <label>See all Users:</label><br />
+          <button onClick={() => navigate('/users')}>click here</button>
+          <button onClick={() => setShowCreateParkForm(true)}>Add a Park:</button>
+          {
+            showCreateParkForm &&
+            <CreatePark />
+          }
+        </div>
       }
-      
+
+
       <Searchbar
         filterText={filterText}
         setFilterText={setFilterText}
       />
+
       <div className="park-list">
         {
           allParks.filter(park => {
@@ -43,7 +52,7 @@ const Parks = ({ allParks }) => {
             })
         }
       </div>
-
+      <div className="added-parks"></div>
     </div>
   )
 }
