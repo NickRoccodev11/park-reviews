@@ -60,7 +60,7 @@ const Profile = () => {
       {
         token ?
           <>
-            <h1>My Reviews</h1>
+            <h2>My Reviews</h2>
             {
               userReviews && userReviews.length > 0 ? (
                 userReviews.map(review => {
@@ -80,7 +80,11 @@ const Profile = () => {
                   <h2> My Comments</h2>
                   {
                     userComments.map(comment => {
-                      return <UserComment comment={comment} />
+                      return <UserComment 
+                      comment={comment} 
+                      token={token}
+                      setUserComments={setUserComments}
+                      />
                     })
                   }
                 </> :

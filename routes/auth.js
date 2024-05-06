@@ -113,9 +113,10 @@ router.get("/comments", async (req, res) => {
 });
 
 router.put("/comments/:id", async (req, res) => {
+  console.log("made it to put route")
   if (req.user) {
     try {
-      const editedComment = await editComment(parseInt(req.params.id));
+      const editedComment = await editComment(parseInt(req.params.id), req.body.content);
       res.status(200).send(editedComment);
     } catch (error) {
       console.error("error on PUT comments/:id route", error);
