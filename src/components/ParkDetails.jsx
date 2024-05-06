@@ -9,6 +9,9 @@ const ParkDetails = () => {
   const [park, setPark] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
 const [token, setToken] = useState("");
+
+console.log(park)
+
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
@@ -47,6 +50,7 @@ const [token, setToken] = useState("");
       showReviewForm && 
       <ReviewForm  
       park={park}
+      setPark={setPark}
       token={token}
       /> 
 
@@ -55,7 +59,7 @@ const [token, setToken] = useState("");
     {
       park.Review.map(review => {
         return(
-          <div>
+          <div className='park-review'>
             <h4>{review.title}</h4>
             <p>{review.content}</p>
             <p>rating: {review.stars} out of five stars</p>

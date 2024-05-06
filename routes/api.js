@@ -52,8 +52,8 @@ router.post ("/reviews", async (req, res) =>{
         req.body.title, 
         req.body.content, 
         req.body.stars, 
-        req.body.park_id,
-        req.user.id
+        req.user.id,
+        req.body.park_id
   
       )
       res.status(201).send(newReview);
