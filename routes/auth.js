@@ -8,7 +8,8 @@ const {
   getReviewsByUser,
   updateReview,
   deleteReview,
-  getCommentsByUser
+  getCommentsByUser,
+  editComment,
 } = require("../db/user");
 
 router.post("/register", async (req, res) => {
@@ -94,21 +95,36 @@ router.delete("/reviews/:id", async (req, res) => {
   }
 });
 
-router.get("/comments", async(req,res)=>{
-  if(req.user){
+router.get("/comments", async (req, res) => {
+  if (req.user) {
     try {
-      const userComments = await getCommentsByUser(req.user.id)
-      if(userComments){
-        res.status(200).send(userComments)
-      }else{
-        res.status(404).send({msg:"You haven't written any comments yet"})
+      const userComments = await getCommentsByUser(req.user.id);
+      if (userComments) {
+        res.status(200).send(userComments);
+      } else {
+        res.status(404).send({ msg: "You haven't written any comments yet" });
       }
     } catch (error) {
-      console.error("error on GET auth/comments/:id route",error)
+      console.error("error on GET auth/comments/:id route", error);
     }
-  }else{
-    res.status(404).send({msg: "you must be logged in to see your comments"})
+  } else {
+    res.status(404).send({ msg: "you must be logged in to see your comments" });
   }
-})
+});
+
+router.put("/comments/:id", async (req, res) => {
+  if (req.user) {
+    try {
+      const editedComment = await editComment(parseInt(req.params.id));
+      res.status(200).send(editedComment);
+    } catch (error) {
+      console.error("error on PUT comments/:id route", error);
+    }
+  } else {
+    res
+      .status(404)
+      .send({ msg: "you must be logged in to edit your comments" });
+  }
+});
 
 module.exports = router;

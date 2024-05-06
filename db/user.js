@@ -141,4 +141,5 @@ module.exports = {
   updateReview,
   deleteReview,
   getCommentsByUser,
+  editComment
 };
