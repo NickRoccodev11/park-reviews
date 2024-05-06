@@ -46,19 +46,23 @@ router.post ("/parks", async (req, res) => {
 });
 
 router.post ("/reviews", async (req, res) =>{
-  try {
-    const newReview = await createReview(
-      req.body.title, 
-      req.body.content, 
-      req.body.stars, 
-      req.body.user_id, 
-      req.body.park_id
-
-    )
-    res.status(201).send(newReview);
-  } catch (error) {
-    console.log(error);
+  console.log("end point")
+  if (req.user) {
+    try {
+      const newReview = await createReview(
+        req.body.title, 
+        req.body.content, 
+        req.body.stars, 
+        req.body.park_id,
+        req.user.id
+  
+      )
+      res.status(201).send(newReview);
+    } catch (error) {
+      console.log(error);
+    }
   }
+  
 });
 
 module.exports = router;

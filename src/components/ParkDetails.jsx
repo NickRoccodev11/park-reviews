@@ -1,11 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import ReviewForm from "./ReviewForm";
+
 
 
 const ParkDetails = () => {
   const {parkId} = useParams();
   const [park, setPark] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
+const [token, setToken] = useState("");
+  useEffect(() => {
+    const sessionToken = sessionStorage.getItem('token');
+    if (sessionToken) {
+      setToken(sessionToken)
+    }
+  }, [])
+
   useEffect(() =>{
     
     const fetchParkDetails = async () => {
@@ -35,7 +45,10 @@ const ParkDetails = () => {
     <button onClick={()=>setShowReviewForm(true)}>Leave a Review</button>
     {
       showReviewForm && 
-      <ReviewForm  park = {park} /> 
+      <ReviewForm  
+      park={park}
+      token={token}
+      /> 
 
     }
     <h2> Reviews </h2>
