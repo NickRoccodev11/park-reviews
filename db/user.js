@@ -117,6 +117,22 @@ const getCommentsByUser = async (user_id) => {
   }
 };
 
+const editComment = async (id,content)=>{
+  try {
+    const editedComment = await prisma.comment.update({
+      where:{
+        id
+      },
+      data:{
+        content
+      }
+    })
+    return editedComment
+  } catch (error) {
+    console.error("error updating a comment in db", error)
+  }
+}
+
 module.exports = {
   registerUser,
   loginUser,
