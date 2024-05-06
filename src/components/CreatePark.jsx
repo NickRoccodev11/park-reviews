@@ -11,7 +11,7 @@ const CreatePark = () => {
 
   const handleSubmit = async () => {
     try {
-      const result = fetch("/parks", {
+      const result = fetch("/api/parks", {
         method: "POST", 
         headers: {
           'Content-Type': 'application/json',
