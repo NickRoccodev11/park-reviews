@@ -1,8 +1,17 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 
-const { registerUser, loginUser, getAllUsers, getReviewsByUser } = require("../db/user");
-
+const {
+  registerUser,
+  loginUser,
+  getAllUsers,
+  getReviewsByUser,
+  updateReview,
+  deleteReview,
+  getCommentsByUser,
+  editComment,
+  deleteComment,
+} = require("../db/user");
 
 router.post("/register", async (req, res) => {
   try {
@@ -34,21 +43,19 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
-router.get('/users', async(req,res)=>{
+router.get("/users", async (req, res) => {
   try {
-    const allUsers = await getAllUsers()
-    res.status(200).send(allUsers)
+    const allUsers = await getAllUsers();
+    res.status(200).send(allUsers);
   } catch (error) {
-    console.error("error on GET auth/users route", error)
+    console.error("error on GET auth/users route", error);
   }
-})
+});
 
 router.get("/reviews", async (req, res) => {
   if (req.user) {
     try {
       const userReviews = await getReviewsByUser(req.user.id);
-      console.log(userReviews);
       res.status(200).send(userReviews);
     } catch (error) {
       console.error("error on GET auth/reviews route");
@@ -58,5 +65,84 @@ router.get("/reviews", async (req, res) => {
   }
 });
 
+router.put("/reviews/:id", async (req, res) => {
+  if (req.user) {
+    try {
+      let updateData = {};
+      for (key in req.body) {
+        if (key === "title" || key === "content" || key === "stars") {
+          updateData[key] = req.body[key];
+        }
+      }
+      const updatedReview = await updateReview(
+        req.user.id,
+        parseInt(req.params.id),
+        req.body.id,
+        updateData
+      );
+      res.status(200).send(updatedReview);
+    } catch (error) {
+      console.error("error on PUT /reviews/:id route", error);
+    }
+  }
+});
+
+router.delete("/reviews/:id", async (req, res) => {
+  try {
+    const deletedReview = await deleteReview(parseInt(req.params.id));
+    res.status(200).send(deletedReview);
+  } catch (error) {
+    console.error("error on DELETE /reviews/:id route", error);
+  }
+});
+
+router.get("/comments", async (req, res) => {
+  if (req.user) {
+    try {
+      const userComments = await getCommentsByUser(req.user.id);
+      if (userComments) {
+        res.status(200).send(userComments);
+      } else {
+        res.status(404).send({ msg: "You haven't written any comments yet" });
+      }
+    } catch (error) {
+      console.error("error on GET auth/comments/:id route", error);
+    }
+  } else {
+    res.status(404).send({ msg: "you must be logged in to see your comments" });
+  }
+});
+
+router.put("/comments/:id", async (req, res) => {
+  console.log("made it to put route");
+  if (req.user) {
+    try {
+      const editedComment = await editComment(
+        parseInt(req.params.id),
+        req.body.content
+      );
+      res.status(200).send(editedComment);
+    } catch (error) {
+      console.error("error on PUT comments/:id route", error);
+    }
+  } else {
+    res
+      .status(404)
+      .send({ msg: "you must be logged in to edit your comments" });
+  }
+});
+
+router.delete("/comments/:id", async (req, res) => {
+  if (req.user) {
+    try {
+      const deletedComment = await deleteComment(parseInt(req.params.id));
+      res.status(200).send(deletedComment);
+    } catch (error) {
+      console.error("error on DELETE /comments/:id route", error);
+    }
+  } else {
+    res.status(404).send({ msg: "you must be logged in to delete a comment" });
+  }
+});
 
 module.exports = router;

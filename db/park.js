@@ -17,6 +17,7 @@ const getParkDetails = async (id) => {
       }, 
       include: {
         Review: true,
+        
       }
     });
     return parkDetails;

@@ -5,6 +5,7 @@ import Parks from './components/Parks';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import ParkDetails from './components/ParkDetails';
 import Users from './components/Users';
 
 function App() {
@@ -31,10 +32,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/:parkId" element={<ParkDetails />} />
         <Route path="/users" element={<Users />} />
       </Routes>
     </>
   )
 }
 
-export default App
+export default App;

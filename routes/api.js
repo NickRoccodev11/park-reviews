@@ -3,6 +3,7 @@ const { getAllParks, getParkDetails, createPark } = require("../db/park.js");
 
 
 router.get("/parks", async (_req, res) => {
+  
   try {
     const allParks = await getAllParks();
     res.status(200).send(allParks);
@@ -11,7 +12,9 @@ router.get("/parks", async (_req, res) => {
   }
 });
 
+
 router.get("/parks/:id", async (req, res) => {
+  
   try {
     const { id } = req.params;
     const parkDetails = await getParkDetails(id);
