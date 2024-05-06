@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 
 const CreatePark = () => {
 
@@ -9,9 +9,10 @@ const CreatePark = () => {
   const [image, setImage] = useState("")
   const [hours, setHours] = useState("")
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const result = fetch("/api/parks", {
+      const result = await fetch("/api/parks", {
         method: "POST", 
         headers: {
           'Content-Type': 'application/json',
@@ -23,6 +24,7 @@ const CreatePark = () => {
       const newPark= await result.json()
       console.log(newPark);
     } catch (error) {
+      console.error(error);
       
     }
   }
@@ -34,28 +36,28 @@ const CreatePark = () => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
-        <label>Description</label>
+        /> <br/>
+        <label>Description</label><br/>
         <input
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-        <label>Contact</label>
+        /><br/>
+        <label>Contact</label><br/>
         <input
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-        />
-        <label>State</label>
+        /><br/>
+        <label>State</label><br/>
         <input
           value={state}
           onChange={(e) => setState(e.target.value)}
-        />
-        <label>Image</label>
+        /><br/>
+        <label>Image</label><br/>
         <input
           value={image}
           onChange={(e) => setImage(e.target.value)}
-        />        
-        <label>Hours</label>
+        />  <br/>      
+        <label>Hours</label><br/>
         <input
           value={hours}
           onChange={(e) => setHours(e.target.value)}/>
@@ -65,4 +67,4 @@ const CreatePark = () => {
   )
 }
 
-export default CreatePark;
+export default CreatePark

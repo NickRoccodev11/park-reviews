@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { getAllParks, getParkDetails, createPark } = require("../db/park.js");
-const { default: CreatePark } = require("../src/components/CreatePark.jsx");
+
 
 router.get("/parks", async (_req, res) => {
   try {
@@ -26,10 +26,15 @@ router.get("/parks/:id", async (req, res) => {
   }
 });
 
-router.push ("/parks", async (req, res ) => {
+router.post ("/parks", async (req, res) => {
   try {
     const newPark= await createPark(
-      name, description, contact, state, image, hours
+      req.body.name, 
+      req.body.description, 
+      req.body.contact, 
+      req.body.state, 
+      req.body.image, 
+      req.body.hours
     )
     res.status(201).send(newPark); 
   } catch (error) {

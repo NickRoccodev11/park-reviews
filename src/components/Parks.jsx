@@ -19,11 +19,6 @@ const Parks = ({ allParks }) => {
     }
   }, [])
 
-  const handleFormSubmit = (createPark) => {
-    createPark.preventDefault();
-    setAdminData({});
-  };
-
   return (
     <div>
       {
@@ -32,7 +27,7 @@ const Parks = ({ allParks }) => {
           <h4>Logged in as Admin</h4>
           <label>See all Users:</label><br />
           <button onClick={() => navigate('/users')}>click here</button>
-          <button onClick={() => showCreateParkForm(true)}>Add a Park:</button>
+          <button onClick={() => setShowCreateParkForm(true)}>Add a Park:</button>
           {
             showCreateParkForm &&
             <CreatePark />
