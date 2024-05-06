@@ -10,6 +10,7 @@ const {
   deleteReview,
   getCommentsByUser,
   editComment,
+  deleteComment,
 } = require("../db/user");
 
 router.post("/register", async (req, res) => {
@@ -113,10 +114,13 @@ router.get("/comments", async (req, res) => {
 });
 
 router.put("/comments/:id", async (req, res) => {
-  console.log("made it to put route")
+  console.log("made it to put route");
   if (req.user) {
     try {
-      const editedComment = await editComment(parseInt(req.params.id), req.body.content);
+      const editedComment = await editComment(
+        parseInt(req.params.id),
+        req.body.content
+      );
       res.status(200).send(editedComment);
     } catch (error) {
       console.error("error on PUT comments/:id route", error);
@@ -125,6 +129,19 @@ router.put("/comments/:id", async (req, res) => {
     res
       .status(404)
       .send({ msg: "you must be logged in to edit your comments" });
+  }
+});
+
+router.delete("/comments/:id", async (req, res) => {
+  if (req.user) {
+    try {
+      const deletedComment = await deleteComment(parseInt(req.params.id));
+      res.status(200).send(deletedComment);
+    } catch (error) {
+      console.error("error on DELETE /comments/:id route", error);
+    }
+  } else {
+    res.status(404).send({ msg: "you must be logged in to delete a comment" });
   }
 });
 
