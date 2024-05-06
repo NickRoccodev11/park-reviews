@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import UserReview from './UserReview'
+import UserComment from './UserComment'
 // teddyB
 // 23947sdkgh
 const Profile = () => {
@@ -8,7 +9,7 @@ const Profile = () => {
   const [userReviews, setUserReviews] = useState([])
   const [userComments, setUserComments] = useState([])
   const navigate = useNavigate()
-
+  console.log(userComments)
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
@@ -73,10 +74,24 @@ const Profile = () => {
                 <p>no reviews written yet!</p>
               )
             }
+            {
+              userComments.length > 0 ?
+                <>
+                  <h2> My Comments</h2>
+                  {
+                    userComments.map(comment => {
+                      return <UserComment comment={comment} />
+                    })
+                  }
+                </> :
+                <>
+                  <h2>My Comments</h2>
+                  <h3> You haven't written any comments yet</h3>
+                </>
+            }
           </> :
           <>
             <h1>You must be logged in to view your profile</h1>
-
             <button onClick={() => navigate('/login')}>Go To Login</button>
           </>
       }

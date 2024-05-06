@@ -94,17 +94,21 @@ router.delete("/reviews/:id", async (req, res) => {
   }
 });
 
-router.get("/comments/:id", async(req,res)=>{
-try {
-  const userComments = await getCommentsByUser(parseInt(req.params.id))
-  if(userComments){
-    res.status(200).send(userComments)
+router.get("/comments", async(req,res)=>{
+  if(req.user){
+    try {
+      const userComments = await getCommentsByUser(req.user.id)
+      if(userComments){
+        res.status(200).send(userComments)
+      }else{
+        res.status(404).send({msg:"You haven't written any comments yet"})
+      }
+    } catch (error) {
+      console.error("error on GET auth/comments/:id route",error)
+    }
   }else{
-    res.status(404).send({msg:"no comments found for that user"})
+    res.status(404).send({msg: "you must be logged in to see your comments"})
   }
-} catch (error) {
-  console.error("error on GET auth/comments/:id route",error)
-}
 })
 
 module.exports = router;

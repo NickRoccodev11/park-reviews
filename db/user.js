@@ -97,18 +97,25 @@ const deleteReview = async (id) => {
   }
 };
 
-const getCommentsByUser = async(user_id)=>{
+const getCommentsByUser = async (user_id) => {
   try {
     const userComments = await prisma.comment.findMany({
-      where:{
-        user_id
-      }
-    })
-    return userComments
+      where: {
+        user_id,
+      },
+      include: {
+        review: {
+          select: {
+            title: true,
+          },
+        },
+      },
+    });
+    return userComments;
   } catch (error) {
-    console.error("error getting user comments from db", error)
+    console.error("error getting user comments from db", error);
   }
-}
+};
 
 module.exports = {
   registerUser,
@@ -117,5 +124,5 @@ module.exports = {
   getAllUsers,
   updateReview,
   deleteReview,
-  getCommentsByUser
+  getCommentsByUser,
 };
