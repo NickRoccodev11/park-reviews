@@ -10,6 +10,14 @@ import Users from './components/Users';
 
 function App() {
   const [allParks, setAllParks] = useState([]);
+  const [showLogoutButton, setShowLogoutButton] = useState(false)
+
+  useEffect(() => {
+    const sessionToken = sessionStorage.getItem('token');
+    if (sessionToken) {
+      setShowLogoutButton(true)
+    }
+  })
 
   useEffect(() => {
     const fetchAllParks = async () => {
@@ -23,17 +31,27 @@ function App() {
     }
     fetchAllParks();
   }, [])
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    setShowLogoutButton(false)
+  }
+
   return (
     <>
       <Navbar />
+      {
+        showLogoutButton &&
+        <button onClick={handleLogout}>Logout</button>
+      }
       <h1>Rate-A-Park</h1>
       <Routes>
         <Route path="/" element={<Parks
-         setAllParks={setAllParks} 
-         allParks={allParks}
-          />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+          setAllParks={setAllParks}
+          allParks={allParks}
+        />} />
+        <Route path="/register" element={<Register setShowLogoutButton={setShowLogoutButton} />} />
+        <Route path="/login" element={<Login setShowLogoutButton={setShowLogoutButton} />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/:parkId" element={<ParkDetails />} />
         <Route path="/users" element={<Users />} />

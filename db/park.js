@@ -143,6 +143,14 @@ const deletePark = async (id) => {
       where: {
         id,
       },
+      include: {
+        Tag: true,
+        Review: {
+          include: {
+            Comment: true,
+          },
+        },
+      },
     });
     return deletedPark;
   } catch (error) {
