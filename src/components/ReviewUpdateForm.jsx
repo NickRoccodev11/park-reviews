@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token }) => {
+const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token,  }) => {
   const [title, setTitle] = useState(review.title)
   const [content, setContent] = useState(review.content)
   const [stars, setStars] = useState(parseInt(review.stars))
