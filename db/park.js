@@ -28,6 +28,7 @@ const getParkDetails = async (id) => {
             user: true,
           },
         },
+        Tag: true,
       },
     });
     return parkDetails;

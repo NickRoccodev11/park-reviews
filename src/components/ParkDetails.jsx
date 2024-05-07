@@ -46,6 +46,18 @@ const ParkDetails = () => {
       <p>Description: {park.description}</p>
       <p>Contact: {park.contact}</p>
       <p>Hours: {park.hours}</p>
+      <span>Tags: </span>
+      {
+        park.Tag.length> 0 &&
+
+        park.Tag.map(tag=>{
+          return(
+            <div className='tag-container'>
+            <span className='tag'> {tag.category}</span><br/>
+            </div>
+          ) 
+        })
+      }
       <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>
       {
         showReviewForm &&
