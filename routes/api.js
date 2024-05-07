@@ -4,7 +4,7 @@ const {
   getParkDetails,
   createPark,
   createReview,
-  createComment
+  createComment,
 } = require("../db/park.js");
 
 router.get("/parks", async (_req, res) => {
@@ -61,6 +61,8 @@ router.post("/reviews", async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    res.status(404).send({ msg: "you must be logged in to leave a review" });
   }
 });
 

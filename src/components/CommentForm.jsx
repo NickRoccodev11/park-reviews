@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-const CommentForm = ({ review, setPark, token }) => {
+const CommentForm = ({ review, setPark, token, setShowCommentForm }) => {
   const [content, setContent] = useState("")
-  
+
   const handleComment = async (e) => {
     e.preventDefault()
     try {
@@ -10,14 +10,15 @@ const CommentForm = ({ review, setPark, token }) => {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`
         },
-        body: {
+        body: JSON.stringify({
           review_id: review.id,
           content
-        }
+        })
       })
       const newComment = await result.json()
+      console.log("newCOmment", newComment)
       setPark(prevPark => {
         const updatedReviews = prevPark.Review.map(prevReview => {
           if (prevReview.id === review.id) {
@@ -33,6 +34,7 @@ const CommentForm = ({ review, setPark, token }) => {
           Review: updatedReviews
         };
       });
+      setShowCommentForm(null)
     } catch (error) {
       console.error("error leaving comment", error)
     }

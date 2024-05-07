@@ -72,6 +72,12 @@ const createReview = async (title, content, stars, user_id, park_id) => {
 
 const createComment = async (content, review_id, user_id) => {
   try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: user_id,
+      },
+    });
+
     const newComment = await prisma.comment.create({
       data: {
         content,
@@ -79,6 +85,8 @@ const createComment = async (content, review_id, user_id) => {
         user_id,
       },
     });
+    newComment.user = user;
+    console.log(newComment)
     return newComment;
   } catch (error) {
     console.error("error putting new comment in db", error);

@@ -9,7 +9,7 @@ const ParkDetails = () => {
   const { parkId } = useParams();
   const [park, setPark] = useState(null);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  const [showCommentForm, setShowCommentForm] = useState(false)
+  const [showCommentForm, setShowCommentForm] = useState(null)
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -69,10 +69,11 @@ const ParkDetails = () => {
               {
                 review.Comment.length > 0 ?
                   review.Comment.map(comment => {
+                    console.log(comment)
                     return (
                       <>
-                        <p>comment.content</p>
-                        <p>comment by user: {comment.User.username}</p>
+                        <p>{comment.content}</p>
+                        <p>comment by user: {comment.user.username}</p>
 
                       </>
                     )
@@ -83,13 +84,14 @@ const ParkDetails = () => {
               }
               {
                 token &&
-                <button onClick={() => setShowCommentForm(true)}>Leave a comment</button>
+                <button onClick={() => setShowCommentForm(review.id)}>Leave a comment</button>
               }
               {
-                showCommentForm &&
-                <CommentForm
+                showCommentForm === review.id &&
+                < CommentForm
                   review={review}
                   setPark={setPark}
+                  setShowCommentForm={setShowCommentForm}
                   token={token}
                 />
               }
