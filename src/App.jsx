@@ -11,13 +11,24 @@ import Users from './components/Users';
 function App() {
   const [allParks, setAllParks] = useState([]);
   const [showLogoutButton, setShowLogoutButton] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
       setShowLogoutButton(true)
     }
-  })
+
+  }, [])
+
+  useEffect(() => {
+    const role = sessionStorage.getItem('role');
+    if (role === 'admin') {
+      setIsAdmin(true)
+    } else {
+      setIsAdmin(false)
+    }
+  }, [showLogoutButton])
 
   useEffect(() => {
     const fetchAllParks = async () => {
@@ -49,6 +60,8 @@ function App() {
         <Route path="/" element={<Parks
           setAllParks={setAllParks}
           allParks={allParks}
+          setIsAdmin={setIsAdmin}
+          isAdmin={isAdmin}
         />} />
         <Route path="/register" element={<Register setShowLogoutButton={setShowLogoutButton} />} />
         <Route path="/login" element={<Login setShowLogoutButton={setShowLogoutButton} />} />
