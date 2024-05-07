@@ -2,7 +2,7 @@ import { useState } from "react"
 
 const UserComment = ({ comment, setUserComments, token }) => {
   const [showEditForm, setShowEditForm] = useState(false)
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState(comment.content)
 
   const handleEdit = async (e) => {
     e.preventDefault()
@@ -63,7 +63,6 @@ const UserComment = ({ comment, setUserComments, token }) => {
           <form onSubmit={handleEdit}>
             <label> edit you comment:</label><br />
             <textarea
-              placeholder={comment.content}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />

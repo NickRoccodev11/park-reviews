@@ -13,6 +13,7 @@ function App() {
   const [showLogoutButton, setShowLogoutButton] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
 
+
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {

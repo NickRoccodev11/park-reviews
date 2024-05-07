@@ -9,7 +9,7 @@ const Profile = () => {
   const [userReviews, setUserReviews] = useState([])
   const [userComments, setUserComments] = useState([])
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
@@ -80,10 +80,10 @@ const Profile = () => {
                   <h2> My Comments</h2>
                   {
                     userComments.map(comment => {
-                      return <UserComment 
-                      comment={comment} 
-                      token={token}
-                      setUserComments={setUserComments}
+                      return <UserComment
+                        comment={comment}
+                        token={token}
+                        setUserComments={setUserComments}
                       />
                     })
                   }

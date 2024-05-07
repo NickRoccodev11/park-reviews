@@ -43,6 +43,10 @@ input {
   background-color: rgb(183, 205, 150);
 }
 
+textarea{
+  background-color: rgb(183, 205, 150);
+}
+
 button {
   background-color: rgb(145, 104, 73);
   box-shadow: 3px 3px 3px rgb(2, 45, 2);
@@ -70,7 +74,7 @@ button {
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 5%;
-box-shadow: 3px 3px 3px rgb(3, 66, 3);
+  box-shadow: 3px 3px 3px rgb(3, 66, 3);
 }
 
 .single-park>h3 {
@@ -90,6 +94,17 @@ box-shadow: 3px 3px 3px rgb(3, 66, 3);
 .park-details>h1 {
   color: rgb(3, 66, 3);
   text-shadow: 2px 2px 2px rgb(63, 44, 21);
+}
+
+.park-details>div>p {
+  margin: 10px 200px;
+
+}
+
+.park-details>div>p>span {
+  color: rgb(99, 25, 25);
+  font-size: larger;
+  font-weight: bold;
 }
 
 .description {

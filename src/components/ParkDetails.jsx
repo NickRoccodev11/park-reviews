@@ -17,6 +17,7 @@ const ParkDetails = () => {
 
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
+    console.log(sessionToken)
     if (sessionToken) {
       setToken(sessionToken)
     }
@@ -64,10 +65,10 @@ const ParkDetails = () => {
         <h1>{park.name}</h1>
         <img src={park.image} alt={park.name} />
         <div>
-          <p>State: {park.state}</p>
-          <p className='description'>Description: {park.description}</p>
-          <p>Contact: {park.contact}</p>
-          <p>Hours: {park.hours}</p>
+          <p><span>State:</span> {park.state}</p>
+          <p className='description'> <span>Description:</span> {park.description}</p>
+          <p><span>Contact:</span> {park.contact}</p>
+          <p><span>Hours:</span> {park.hours}</p>
         </div>
 
         <span>Tags: </span>
@@ -99,7 +100,11 @@ const ParkDetails = () => {
           <button onClick={handleDelete}>delete park</button>
         </div>
       }
-      <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>
+      {
+        token &&
+        <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>
+      }
+
       {
         showReviewForm &&
         <ReviewForm
