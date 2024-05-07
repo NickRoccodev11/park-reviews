@@ -56,6 +56,76 @@ const createPark = async (name, description, contact, state, image, hours) => {
   }
 };
 
+const updatePark = async (
+  name,
+  description,
+  contact,
+  state,
+  image,
+  hours,
+  tags,
+  park_id
+) => {
+  try {
+    for (tag of tags) {
+      const existingTag = await prisma.tag.findFirst({
+        where: {
+          category: tag,
+          park_id,
+        },
+      });
+      if (!existingTag) {
+        await prisma.tag.create({
+          data: {
+            category: tag,
+            park: {
+              connect: {
+                id: park_id,
+              },
+            },
+          },
+        });
+      }
+    }
+
+    await prisma.park.update({
+      where: {
+        id: park_id,
+      },
+      data: {
+        name,
+        description,
+        contact,
+        state,
+        image,
+        hours,
+      },
+    });
+    const updatedPark = await prisma.park.findFirst({
+      where: {
+        id: park_id,
+      },
+      include: {
+        Review: {
+          include: {
+            Comment: {
+              include: {
+                review: true,
+                user: true,
+              },
+            },
+            user: true,
+          },
+        },
+        Tag: true,
+      },
+    });
+    return updatedPark;
+  } catch (error) {
+    console.error("error editing park in db", error);
+  }
+};
+
 const createReview = async (title, content, stars, user_id, park_id) => {
   try {
     const newReview = await prisma.review.create({
@@ -99,6 +169,7 @@ module.exports = {
   getAllParks,
   getParkDetails,
   createPark,
+  updatePark,
   createReview,
   createComment,
 };

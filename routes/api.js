@@ -3,7 +3,7 @@ const {
   getAllParks,
   getParkDetails,
   createPark,
-  editPark,
+  updatePark,
   createReview,
   createComment,
 } = require("../db/park.js");
@@ -48,6 +48,24 @@ router.post("/parks", async (req, res) => {
   }
 });
 
+router.put("/parks/:id", async (req, res) => {
+  try {
+    const editedPark = await updatePark(
+      req.body.name,
+      req.body.description,
+      req.body.contact,
+      req.body.state,
+      req.body.image,
+      req.body.hours,
+      req.body.tags,
+      parseInt(req.params.id)
+    );
+    res.status(200).send(editedPark);
+  } catch (error) {
+    console.error("error on PUT /parks/:id route", error);
+  }
+});
+
 router.post("/reviews", async (req, res) => {
   if (req.user) {
     try {
@@ -81,24 +99,6 @@ router.post("/comments", async (req, res) => {
     }
   } else {
     res.status(404).send({ msg: "you must be signed in to leave a comment" });
-  }
-});
-
-router.put("/parks/:id", async (req, res) => {
-  try {
-    const editedPark = await editPark(
-      req.body.name,
-      req.body.desciption,
-      req.body.contact,
-      req.body.state,
-      req.body.image,
-      req.body.hours,
-      req.body.tags,
-      parseInt(req.params.id)
-    );
-    res.status(200).send(editedPark);
-  } catch (error) {
-    console.error("error on PUT /parks/:id route", error);
   }
 });
 
