@@ -4,6 +4,7 @@ const getAllParks = async () => {
   const allParks = await prisma.park.findMany({
     include: {
       Review: true,
+      Tag: true,
     },
   });
   return allParks;

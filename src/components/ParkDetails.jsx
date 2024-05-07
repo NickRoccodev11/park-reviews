@@ -11,7 +11,6 @@ const ParkDetails = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showCommentForm, setShowCommentForm] = useState(null)
   const [token, setToken] = useState("");
-  console.log(park)
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
