@@ -1,14 +1,24 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const getAverageRating = (reviews)=>{
-const total = reviews.reduce((acc,curr)=>acc+ curr.stars, 0 )
-const average = total/ reviews.length
-return average.toFixed(2)
-}
-
+//todo: average rating not updating correctly
 const SinglePark = ({ park }) => {
   const navigate = useNavigate()
+  const [averageRating, setAverageRating] = useState(0)
+
+  useEffect(() => {
+    const getAverageRating = (reviews) => {
+      const total = reviews.reduce((acc, curr) => acc + parseInt(curr.stars), 0);
+      const average = (total / reviews.length).toFixed(2);
+      setAverageRating(average);
+    };
+
+    if (park.Review.length > 0) {
+      getAverageRating(park.Review);
+    }
+  }, [park.Review]);
+
+
   console.log(park)
   return (
     <div className='single-park'>
@@ -29,7 +39,7 @@ const SinglePark = ({ park }) => {
       }
       {
         park.Review.length > 0 &&
-        <p>average rating: {getAverageRating(park.Review)} </p>
+        <p>average rating: {averageRating} </p>
       }
       <button onClick={() => navigate(`/${park.id}`)}>See Details</button>
     </div>

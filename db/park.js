@@ -128,6 +128,12 @@ const updatePark = async (
 
 const createReview = async (title, content, stars, user_id, park_id) => {
   try {
+    const user = await prisma.user.findFirst({
+      where: {
+        id: user_id,
+      },
+    });
+
     const newReview = await prisma.review.create({
       data: {
         title,
@@ -137,6 +143,7 @@ const createReview = async (title, content, stars, user_id, park_id) => {
         park_id,
       },
     });
+    newReview.user = user;
     return newReview;
   } catch (error) {
     console.error(error);
