@@ -18,7 +18,6 @@ const CommentForm = ({ review, setPark, token, setShowCommentForm }) => {
         })
       })
       const newComment = await result.json()
-      console.log("newCOmment", newComment)
       setPark(prevPark => {
         const updatedReviews = prevPark.Review.map(prevReview => {
           if (prevReview.id === review.id) {

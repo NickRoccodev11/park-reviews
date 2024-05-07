@@ -3,11 +3,9 @@ const jwt = require("jsonwebtoken");
 
 router.use((req, res, next) => {
   const auth = req.headers.authorization;
-  console.log("auth", auth)
   const token = auth?.startsWith("Bearer ") ? auth.slice(7) : null;
   if (token) {
     req.user = jwt.verify(token, process.env.JWT);
-    console.log("USER", req.user)
   } else {
     req.user = null;
   }

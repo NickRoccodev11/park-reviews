@@ -22,7 +22,6 @@ const CreatePark = () => {
         })
       })
       const newPark= await result.json()
-      console.log(newPark);
     } catch (error) {
       console.error(error);
       

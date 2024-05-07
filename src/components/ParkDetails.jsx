@@ -69,7 +69,6 @@ const ParkDetails = () => {
               {
                 review.Comment.length > 0 ?
                   review.Comment.map(comment => {
-                    console.log(comment)
                     return (
                       <>
                         <p>{comment.content}</p>

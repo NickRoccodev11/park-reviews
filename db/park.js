@@ -86,7 +86,6 @@ const createComment = async (content, review_id, user_id) => {
       },
     });
     newComment.user = user;
-    console.log(newComment)
     return newComment;
   } catch (error) {
     console.error("error putting new comment in db", error);
