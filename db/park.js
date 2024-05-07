@@ -24,6 +24,7 @@ const getParkDetails = async (id) => {
                 user: true,
               },
             },
+            user: true,
           },
         },
       },

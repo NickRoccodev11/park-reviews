@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ReviewForm = ({ park, setPark, token }) => {
+const ReviewForm = ({ park, setPark, token, setShowReviewForm }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [stars, setStars] = useState("");
@@ -22,10 +22,12 @@ const ReviewForm = ({ park, setPark, token }) => {
         }),
       });
       const newReview = await result.json();
+      newReview.Comment = [];
       setPark(prevPark => ({
         ...prevPark,
         Review: [...prevPark.Review, newReview]
       }));
+      setShowReviewForm(false)
     } catch (error) {
       console.error("Failed to submit review:", error);
     }

@@ -11,7 +11,7 @@ const ParkDetails = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showCommentForm, setShowCommentForm] = useState(null)
   const [token, setToken] = useState("");
-
+  console.log(park)
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
@@ -53,50 +53,56 @@ const ParkDetails = () => {
         <ReviewForm
           park={park}
           setPark={setPark}
+          setShowReviewForm={setShowReviewForm}
           token={token}
         />
 
       }
       <h2> Reviews </h2>
       {
-        park.Review.map(review => {
-          return (
-            <div className='park-review'>
-              <h4>{review.title}</h4>
-              <p>{review.content}</p>
-              <p>rating: {review.stars} out of five stars</p>
-              <h5>Comments on this review:</h5>
-              {
-                review.Comment.length > 0 ?
-                  review.Comment.map(comment => {
-                    return (
-                      <>
-                        <p>{comment.content}</p>
-                        <p>comment by user: {comment.user.username}</p>
+        park.Review.length > 0 ?
+          park.Review.map(review => {
+            return (
+              <div className='park-review'>
+                <h4>{review.title}</h4>
+                <p>{review.content}</p>
+                <p>rating: {review.stars} out of 5 stars</p>
+                <p>review by {review.user.username}</p>
+                <h5>Comments on this review:</h5>
+                {
+                  review.Comment.length > 0 ?
+                    review.Comment.map(comment => {
+                      return (
+                        <>
+                          <p>{comment.content}</p>
+                          <p>comment by user: {comment.user.username}</p>
 
-                      </>
-                    )
-                  }) :
-                  <>
-                    <p>no comments for this review yet</p>
-                  </>
-              }
-              {
-                token &&
-                <button onClick={() => setShowCommentForm(review.id)}>Leave a comment</button>
-              }
-              {
-                showCommentForm === review.id &&
-                < CommentForm
-                  review={review}
-                  setPark={setPark}
-                  setShowCommentForm={setShowCommentForm}
-                  token={token}
-                />
-              }
-            </div>
-          )
-        })
+                        </>
+                      )
+                    }) :
+                    <>
+                      <p>no comments for this review yet</p>
+                    </>
+                }
+                {
+                  token &&
+                  <button onClick={() => setShowCommentForm(review.id)}>Leave a comment</button>
+                }
+                {
+                  showCommentForm === review.id &&
+                  < CommentForm
+                    review={review}
+                    setPark={setPark}
+                    setShowCommentForm={setShowCommentForm}
+                    token={token}
+                  />
+                }
+              </div>
+            )
+          }) :
+          <>
+            <p>No Reviews for this park yet</p>
+          </>
       }
 
     </div>
