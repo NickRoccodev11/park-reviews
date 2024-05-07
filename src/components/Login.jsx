@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = ({ setShowLogoutButton }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ const Login = ({ setShowLogoutButton }) => {
       if (LoggedUserData.token) {
         sessionStorage.setItem("token", LoggedUserData.token)
         setShowLogoutButton(true)
+        navigate('/profile')
       }
       if (LoggedUserData.loggedUser.is_admin) {
         sessionStorage.setItem("role", "admin")
