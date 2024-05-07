@@ -4,6 +4,7 @@ const {
   getParkDetails,
   createPark,
   updatePark,
+  deletePark,
   createReview,
   createComment,
 } = require("../db/park.js");
