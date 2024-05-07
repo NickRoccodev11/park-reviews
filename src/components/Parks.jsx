@@ -4,20 +4,20 @@ import SinglePark from "./SinglePark"
 import Searchbar from "./Searchbar"
 import CreatePark from "./CreatePark"
 
-const Parks = ({ allParks, setAllParks }) => {
+const Parks = ({ allParks, setAllParks, isAdmin, setIsAdmin }) => {
   const [filterText, setFilterText] = useState("")
-  const [isAdmin, setIsAdmin] = useState(false)
+ 
   const [showCreateParkForm, setShowCreateParkForm] = useState(false)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const role = sessionStorage.getItem('role');
-    if (role === 'admin') {
-      setIsAdmin(true)
-    } else {
-      setIsAdmin(false)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const role = sessionStorage.getItem('role');
+  //   if (role === 'admin') {
+  //     setIsAdmin(true)
+  //   } else {
+  //     setIsAdmin(false)
+  //   }
+  // }, [])
 
   return (
     <div>
