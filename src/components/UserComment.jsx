@@ -53,7 +53,7 @@ const UserComment = ({ comment, setUserComments, token }) => {
   }
 
   return (
-    <div className='user-comment'>
+    <div className='user-post'>
       <h4>{comment.content}</h4>
       <span>comment made on the review: "{comment.review.title}"</span><br />
       <button onClick={() => setShowEditForm(true)}>edit comment</button><br />

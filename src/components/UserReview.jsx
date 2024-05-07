@@ -20,7 +20,7 @@ const UserReview = ({ token, review, setUserReviews }) => {
     }
   }
     return (
-      <div className="user-review">
+      <div className="user-post">
         <h3>{review.title}</h3>
         <h4>a review for {review.park.name}</h4>
         <p>{review.content}</p>
