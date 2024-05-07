@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-const Register = () => {
+const Register = ({ setShowLogoutButton }) => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("")
@@ -27,9 +27,8 @@ const Register = () => {
       const userData = await result.json()
       if (userData.token) {
         sessionStorage.setItem('token', userData.token)
-
         sessionStorage.setItem('role', 'user')
-
+        setShowLogoutButton(true)
       } else {
         console.log("error registering, no token recieved", userData)
       }

@@ -50,7 +50,7 @@ const createPark = async (name, description, contact, state, image, hours) => {
         hours,
       },
     });
-    console.log(newPark)
+    console.log(newPark);
     const id = newPark.id;
     const newParkWithReviews = await prisma.park.findFirst({
       where: {
@@ -137,6 +137,27 @@ const updatePark = async (
   }
 };
 
+const deletePark = async (id) => {
+  try {
+    const deletedPark = await prisma.park.delete({
+      where: {
+        id,
+      },
+      include: {
+        Tag: true,
+        Review: {
+          include: {
+            Comment: true,
+          },
+        },
+      },
+    });
+    return deletedPark;
+  } catch (error) {
+    console.error("error delting park", error);
+  }
+};
+
 const createReview = async (title, content, stars, user_id, park_id) => {
   try {
     const user = await prisma.user.findFirst({
@@ -190,4 +211,5 @@ module.exports = {
   updatePark,
   createReview,
   createComment,
+  deletePark,
 };

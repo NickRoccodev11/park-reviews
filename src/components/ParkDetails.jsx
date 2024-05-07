@@ -43,7 +43,18 @@ const ParkDetails = () => {
     fetchParkDetails();
   }, []);
 
-
+const handleDelete = async()=>{
+  try {
+    const result = await fetch(`/api/parks/${park.id}`,{
+      method: 'DELETE'
+    })
+    const deletedPark = await result.json()
+    //update allParks state
+    //navigate back to all parks
+  } catch (error) {
+    
+  }
+}
 
   if (!park) return <div>Loading...</div>;
 
@@ -82,6 +93,7 @@ const ParkDetails = () => {
          setShowEditPark={setShowEditPark}
          />
         }
+        <button onClick={handleDelete}>delete park</button>
       </div>
       }
       <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>

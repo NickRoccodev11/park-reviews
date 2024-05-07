@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Login = () => {
+const Login = ({setShowLogoutButton}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -20,6 +20,7 @@ const Login = () => {
       const LoggedUserData = await result.json();
       if (LoggedUserData.token) {
         sessionStorage.setItem("token", LoggedUserData.token)
+        setShowLogoutButton(true)
       }
       if(LoggedUserData.loggedUser.is_admin){
         sessionStorage.setItem("role", "admin")

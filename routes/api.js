@@ -4,6 +4,7 @@ const {
   getParkDetails,
   createPark,
   updatePark,
+  deletePark,
   createReview,
   createComment,
 } = require("../db/park.js");
@@ -65,6 +66,15 @@ router.put("/parks/:id", async (req, res) => {
     console.error("error on PUT /parks/:id route", error);
   }
 });
+
+router.delete('/parks/:id', async(req,res)=>{
+  try {
+    const deletedPark = await deletePark(parseInt(req.params.id));
+    res.status(200).send(deletedPark)
+  } catch (error) {
+    
+  }
+})
 
 router.post("/reviews", async (req, res) => {
   if (req.user) {
