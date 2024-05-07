@@ -43,7 +43,7 @@ input {
   background-color: rgb(183, 205, 150);
 }
 
-textarea{
+textarea {
   background-color: rgb(183, 205, 150);
 }
 
@@ -205,7 +205,8 @@ nav {
 }
 
 .user-review,
-.user-comment {
+.user-comment,
+.user-post {
   width: 400px;
   background-color: rgb(131, 159, 88);
   border: 2px solid rgb(40, 9, 63);
