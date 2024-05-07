@@ -1,10 +1,10 @@
 import { useState } from "react"
 
 
-const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token }) => {
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [stars, setStars] = useState("")
+const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token,  }) => {
+  const [title, setTitle] = useState(review.title)
+  const [content, setContent] = useState(review.content)
+  const [stars, setStars] = useState(parseInt(review.stars))
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,13 +51,11 @@ const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token }) 
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={review.title}
         /><br />
         <label >content</label><br />
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder={review.content}
         /><br />
         <label >stars</label><br />
         <input
@@ -66,7 +64,6 @@ const ReviewUpdateForm = ({ review, setShowUpdateForm, setUserReviews, token }) 
           max="5"
           value={stars}
           onChange={(e) => setStars(e.target.value)}
-          placeholder={review.stars}
         /><br />
         <button>submit</button>
       </form>

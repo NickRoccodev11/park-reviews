@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 
 const Register = ({ setShowLogoutButton }) => {
   const [username, setUsername] = useState("");
@@ -7,6 +7,7 @@ const Register = ({ setShowLogoutButton }) => {
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +30,7 @@ const Register = ({ setShowLogoutButton }) => {
         sessionStorage.setItem('token', userData.token)
         sessionStorage.setItem('role', 'user')
         setShowLogoutButton(true)
+        navigate('/')
       } else {
         console.log("error registering, no token recieved", userData)
       }

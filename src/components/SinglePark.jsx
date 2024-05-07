@@ -17,8 +17,6 @@ const SinglePark = ({ park }) => {
     }
   }, [park.Review]);
 
-
-  console.log(park)
   return (
     <div className='single-park'>
       <h3>{park.name}</h3>
