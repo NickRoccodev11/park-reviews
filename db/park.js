@@ -70,9 +70,25 @@ const createReview = async (title, content, stars, user_id, park_id) => {
   }
 };
 
+const createComment = async (content, review_id, user_id) => {
+  try {
+    const newComment = await prisma.comment.create({
+      data: {
+        content,
+        review_id,
+        user_id,
+      },
+    });
+    return newComment;
+  } catch (error) {
+    console.error("error putting new comment in db", error);
+  }
+};
+
 module.exports = {
   getAllParks,
   getParkDetails,
   createPark,
   createReview,
+  createComment,
 };
