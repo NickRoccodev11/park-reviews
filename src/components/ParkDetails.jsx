@@ -58,30 +58,31 @@ const ParkDetails = () => {
   if (!park) return <div>Loading...</div>;
 
   return (
+    <div>
+      <div className='park-details'>
 
-    <div className='park-details'>
+        <h1>{park.name}</h1>
+        <img src={park.image} alt={park.name} />
+        <div>
+          <p>State: {park.state}</p>
+          <p className='description'>Description: {park.description}</p>
+          <p>Contact: {park.contact}</p>
+          <p>Hours: {park.hours}</p>
+        </div>
 
-      <h1>{park.name}</h1>
-      <img src={park.image} alt={park.name} />
-      <div>
-        <p>State: {park.state}</p>
-        <p>Description: {park.description}</p>
-        <p>Contact: {park.contact}</p>
-        <p>Hours: {park.hours}</p>
+        <span>Tags: </span>
+        {
+          park.Tag.length > 0 &&
+
+          park.Tag.map(tag => {
+            return (
+              <div className='tag-container'>
+                <span className='tag'> {tag.category}</span><br />
+              </div>
+            )
+          })
+        }
       </div>
-
-      <span>Tags: </span>
-      {
-        park.Tag.length > 0 &&
-
-        park.Tag.map(tag => {
-          return (
-            <div className='tag-container'>
-              <span className='tag'> {tag.category}</span><br />
-            </div>
-          )
-        })
-      }
       {
         isAdmin &&
         <div className="admin-card">
@@ -109,7 +110,7 @@ const ParkDetails = () => {
         />
 
       }
-      <h2> Reviews </h2>
+      <h2 className='reviews-heading'> Reviews </h2>
       <div className='review-container'>
         {
           park.Review.length > 0 ?
@@ -119,13 +120,13 @@ const ParkDetails = () => {
                   <h4>{review.title}</h4>
                   <p>{review.content}</p>
                   <p><span className='park-info'>rating: </span> {review.stars} out of 5 stars</p>
-                  <p> <span className='park-info'>review by </span> {review.user.username}</p>
+                  <p className='reviewed-by'> <span className='park-info'>review by </span> {review.user.username}</p>
                   <h5 className='park-info'>Comments on this review:</h5>
                   {
                     review.Comment.length > 0 ?
                       review.Comment.map(comment => {
                         return (
-                          <div className='user-post'>
+                          <div className='user-post comment'>
                             <p>{comment.content}</p>
                             <p className='park-info'>comment by user: {comment.user.username}</p>
 

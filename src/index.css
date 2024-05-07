@@ -1,12 +1,36 @@
 body {
-  background-color: rgb(33, 96, 19);
+  background-color: rgb(43, 154, 98);
+}
+
+nav {
+  background-color: rgb(183, 205, 150);
+}
+
+nav>* {
+  font-size: larger;
+  text-decoration: none;
+  background-color: #8dd19e;
+  border-radius: 10%;
+  color: rgb(68, 91, 44);
+  padding: 10px;
+}
+
+nav>*:hover {
+  background-color: #FFbe98;
+  color: blue;
 }
 
 .logo {
   text-align: center;
   font-size: 55px;
   text-shadow: 2px 2px 2px rgb(59, 41, 27);
-  color: rgb(8, 42, 28);
+  color: rgb(23, 81, 93);
+}
+
+h2 {
+  text-align: center;
+  text-shadow: 2px 2px 2px rgb(59, 41, 27);
+  color: rgb(23, 81, 93);
 }
 
 img {
@@ -25,6 +49,7 @@ button {
   color: #FFbe98;
   padding: 8px;
   margin: 15px;
+  font-size: 15px;
 }
 
 .park-list {
@@ -33,7 +58,7 @@ button {
 }
 
 .single-park {
-  border: 4px solid rgb(59, 41, 27);
+  border: 2px solid rgb(36, 70, 42);
   width: 350px;
   height: auto;
   margin: 20px;
@@ -45,7 +70,7 @@ button {
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 5%;
-
+box-shadow: 3px 3px 3px rgb(3, 66, 3);
 }
 
 .single-park>h3 {
@@ -53,7 +78,7 @@ button {
 }
 
 .park-details {
-  background-color: rgb(33, 96, 19);
+  background-color: rgb(116, 174, 103);
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -62,8 +87,13 @@ button {
   font-size: larger;
 }
 
-.park-details>p {
-  margin: 0 20px;
+.park-details>h1 {
+  color: rgb(3, 66, 3);
+  text-shadow: 2px 2px 2px rgb(63, 44, 21);
+}
+
+.description {
+  margin: 0px 200px;
 }
 
 .park-info {
@@ -127,9 +157,28 @@ nav {
 }
 
 .review-container {
-  width:fit-content;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-container>div {
+  width: 500px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: larger
+}
+
+.reviewed-by>* {
+  font-style: italic;
+}
+
+.reviews-heading {
+  color: rgb(2, 45, 2);
+  text-align: center;
+  font-size: 45px;
 }
 
 .user-review,
@@ -138,7 +187,15 @@ nav {
   border: 2px solid black;
   padding: 10px;
   margin: 20px;
+}
 
+.user-review,
+.user-comment {
+  width: 400px;
+  background-color: rgb(131, 159, 88);
+  border: 2px solid rgb(40, 9, 63);
+  padding: 10px;
+  margin: 20px;
 }
 
 .tag-container {
@@ -162,11 +219,8 @@ nav {
   align-items: center;
 }
 
-.user-post {
-  background-color: rgb(131, 159, 88);
-  border: 2px solid rgb(40, 9, 63);
-  padding: 10px;
-  margin: 20px;
+.comment {
+  background-color: rgb(173, 197, 136);
 }
 
 .single-user {
