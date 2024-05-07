@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReviewForm from "./ReviewForm";
 import CommentForm from './CommentForm';
+import EditPark from './EditPark';
 
 
 
@@ -11,10 +12,19 @@ const ParkDetails = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [showCommentForm, setShowCommentForm] = useState(null)
   const [token, setToken] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [showEditPark, setShowEditPark] = useState(false)
+
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {
       setToken(sessionToken)
+    }
+    const role = sessionStorage.getItem('role');
+    if (role === 'admin') {
+      setIsAdmin(true)
+    } else {
+      setIsAdmin(false)
     }
   }, [])
 
@@ -48,15 +58,31 @@ const ParkDetails = () => {
       <p>Hours: {park.hours}</p>
       <span>Tags: </span>
       {
-        park.Tag.length> 0 &&
+        park.Tag.length > 0 &&
 
-        park.Tag.map(tag=>{
-          return(
+        park.Tag.map(tag => {
+          return (
             <div className='tag-container'>
-            <span className='tag'> {tag.category}</span><br/>
+              <span className='tag'> {tag.category}</span><br />
             </div>
-          ) 
+          )
         })
+      }
+      {
+        isAdmin &&
+        <div className="admin-card">
+        <h4>Logged in as Admin</h4>
+        <label>Edit park:</label><br />
+        <button onClick={() => setShowEditPark(true)}>click here</button>
+        {
+          showEditPark &&
+         <EditPark 
+         park={park}
+         setPark={setPark}
+         setShowEditPark={setShowEditPark}
+         />
+        }
+      </div>
       }
       <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>
       {

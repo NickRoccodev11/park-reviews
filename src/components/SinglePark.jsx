@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 
 const SinglePark = ({ park }) => {
   const navigate = useNavigate()
-  console.log(park)
   return (
     <div className='single-park'>
       <h3>{park.name}</h3>

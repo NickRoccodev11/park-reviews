@@ -51,7 +51,8 @@ const Parks = ({ allParks, setAllParks }) => {
               park.name.toLowerCase().includes(filterText.toLowerCase())
           })
             .map(park => {
-              return <SinglePark park={park} />
+              return <SinglePark 
+              park={park} />
             })
         }
       </div>
