@@ -1,7 +1,6 @@
 import { useState } from "react"
 
-const CreatePark = () => {
-
+const CreatePark = ({ setAllParks, setShowCreateParkForm }) => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [contact, setContact] = useState("")
@@ -13,18 +12,25 @@ const CreatePark = () => {
     e.preventDefault();
     try {
       const result = await fetch("/api/parks", {
-        method: "POST", 
+        method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify ({
-          name, description, contact, state, image, hours
+        body: JSON.stringify({
+          name,
+          description,
+          contact,
+          state,
+          image,
+          hours
         })
       })
-      const newPark= await result.json()
+      const newPark = await result.json()
+      setAllParks(prev => [...prev, newPark])
+      setShowCreateParkForm(false)
     } catch (error) {
       console.error(error);
-      
+
     }
   }
 
@@ -35,32 +41,32 @@ const CreatePark = () => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-        /> <br/>
-        <label>Description</label><br/>
+        /> <br />
+        <label>Description</label><br />
         <input
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        /><br/>
-        <label>Contact</label><br/>
+        /><br />
+        <label>Contact</label><br />
         <input
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-        /><br/>
-        <label>State</label><br/>
+        /><br />
+        <label>State</label><br />
         <input
           value={state}
           onChange={(e) => setState(e.target.value)}
-        /><br/>
-        <label>Image</label><br/>
+        /><br />
+        <label>Image</label><br />
         <input
           value={image}
           onChange={(e) => setImage(e.target.value)}
-        />  <br/>      
-        <label>Hours</label><br/>
+        />  <br />
+        <label>Hours</label><br />
         <input
           value={hours}
-          onChange={(e) => setHours(e.target.value)}/>
-          <button>Submit</button>
+          onChange={(e) => setHours(e.target.value)} />
+        <button>Submit</button>
       </form>
     </div>
   )
