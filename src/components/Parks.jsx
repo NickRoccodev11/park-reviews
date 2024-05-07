@@ -4,9 +4,9 @@ import SinglePark from "./SinglePark"
 import Searchbar from "./Searchbar"
 import CreatePark from "./CreatePark"
 
-const Parks = ({ allParks }) => {
+const Parks = ({ allParks, setAllParks }) => {
   const [filterText, setFilterText] = useState("")
-  const [isAdmin, setIsAdmin, setAdminData] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [showCreateParkForm, setShowCreateParkForm] = useState(false)
   const navigate = useNavigate()
 
@@ -30,7 +30,10 @@ const Parks = ({ allParks }) => {
           <button onClick={() => setShowCreateParkForm(true)}>Add a Park:</button>
           {
             showCreateParkForm &&
-            <CreatePark />
+            <CreatePark 
+            setAllParks={setAllParks} 
+            setShowCreateParkForm={setShowCreateParkForm}
+            />
           }
         </div>
       }
@@ -48,11 +51,11 @@ const Parks = ({ allParks }) => {
               park.name.toLowerCase().includes(filterText.toLowerCase())
           })
             .map(park => {
-              return <SinglePark park={park} />
+              return <SinglePark 
+              park={park} />
             })
         }
       </div>
-      <div className="added-parks"></div>
     </div>
   )
 }

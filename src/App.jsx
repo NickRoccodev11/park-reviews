@@ -10,7 +10,7 @@ import Users from './components/Users';
 
 function App() {
   const [allParks, setAllParks] = useState([]);
- 
+
   useEffect(() => {
     const fetchAllParks = async () => {
       try {
@@ -28,7 +28,10 @@ function App() {
       <Navbar />
       <h1>Rate-A-Park</h1>
       <Routes>
-        <Route path="/" element={<Parks allParks={allParks} />} />
+        <Route path="/" element={<Parks
+         setAllParks={setAllParks} 
+         allParks={allParks}
+          />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />

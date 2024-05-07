@@ -39,9 +39,30 @@ nav {
   width: 200px;
 }
 
-.user-review, .user-comment {
+.user-review,
+.user-commentm,
+.park-review {
   border: 2px solid black;
   padding: 10px;
   margin: 20px;
 
+}
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.tag {
+  border: 2px solid black;
+  color: blue;
+  padding: 5px;
+  margin: 10px 5px;
+  border-radius: 10%;
+  background-color: rgb(205, 192, 192);
+}
+
+.button {
+  margin: 20px;
 }

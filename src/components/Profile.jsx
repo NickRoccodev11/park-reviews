@@ -9,7 +9,7 @@ const Profile = () => {
   const [userReviews, setUserReviews] = useState([])
   const [userComments, setUserComments] = useState([])
   const navigate = useNavigate()
-  console.log(userComments)
+  
   useEffect(() => {
     const sessionToken = sessionStorage.getItem('token');
     if (sessionToken) {

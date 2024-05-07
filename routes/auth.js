@@ -114,7 +114,6 @@ router.get("/comments", async (req, res) => {
 });
 
 router.put("/comments/:id", async (req, res) => {
-  console.log("made it to put route");
   if (req.user) {
     try {
       const editedComment = await editComment(
