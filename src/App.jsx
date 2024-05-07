@@ -55,7 +55,7 @@ function App() {
         showLogoutButton &&
         <button onClick={handleLogout}>Logout</button>
       }
-      <h1>Rate-A-Park</h1>
+      <h1 className='logo'>Rate-A-Park</h1>
       <Routes>
         <Route path="/" element={<Parks
           setAllParks={setAllParks}

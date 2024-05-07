@@ -13,15 +13,15 @@ const Users = () => {
   }, [])
 
   return (
-    <div>
+    <div className='users-container'>
       {
         allUsers &&
         allUsers.map(user => {
           return (
             <div className='single-user'>
               <h3>{user.first_name} {user.last_name}</h3>
-              <p>username: {user.username}</p>
-              <p>email: {user.email}</p>
+              <p><span className='user-info'>username: </span> {user.username}</p>
+              <p> <span className='user-info'>email: </span> {user.email}</p>
             </div>
           )
         })

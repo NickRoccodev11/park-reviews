@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Login = ({setShowLogoutButton}) => {
+const Login = ({ setShowLogoutButton }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -22,9 +22,9 @@ const Login = ({setShowLogoutButton}) => {
         sessionStorage.setItem("token", LoggedUserData.token)
         setShowLogoutButton(true)
       }
-      if(LoggedUserData.loggedUser.is_admin){
+      if (LoggedUserData.loggedUser.is_admin) {
         sessionStorage.setItem("role", "admin")
-      }else{
+      } else {
         sessionStorage.setItem("role", "user")
       }
     } catch (error) {
@@ -33,26 +33,28 @@ const Login = ({setShowLogoutButton}) => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <label >Username:</label><br />
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        /><br />
-        <label >Password</label><br />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /><br />
-        <button>Login</button>
-      </form>
-    </div>
+    <div className='form-container'>
+      <div className='form'>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <label >Username:</label><br />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          /><br />
+          <label >Password</label><br />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          /><br />
+          <button>Login</button>
+        </form>
+      </div></div>
+
   )
 }
 

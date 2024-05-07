@@ -21,12 +21,16 @@ const Parks = ({ allParks, setAllParks, isAdmin, setIsAdmin }) => {
 
   return (
     <div>
+
+<Searchbar
+        filterText={filterText}
+        setFilterText={setFilterText}
+      />
       {
         isAdmin &&
         <div className="admin-card">
           <h4>Logged in as Admin</h4>
-          <label>See all Users:</label><br />
-          <button onClick={() => navigate('/users')}>click here</button>
+          <button onClick={() => navigate('/users')}>See All Users</button>
           <button onClick={() => setShowCreateParkForm(true)}>Add a Park:</button>
           {
             showCreateParkForm &&
@@ -39,10 +43,6 @@ const Parks = ({ allParks, setAllParks, isAdmin, setIsAdmin }) => {
       }
 
 
-      <Searchbar
-        filterText={filterText}
-        setFilterText={setFilterText}
-      />
 
       <div className="park-list">
         {

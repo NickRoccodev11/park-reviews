@@ -43,30 +43,33 @@ const ParkDetails = () => {
     fetchParkDetails();
   }, []);
 
-const handleDelete = async()=>{
-  try {
-    const result = await fetch(`/api/parks/${park.id}`,{
-      method: 'DELETE'
-    })
-    const deletedPark = await result.json()
-    //update allParks state
-    //navigate back to all parks
-  } catch (error) {
-    
+  const handleDelete = async () => {
+    try {
+      const result = await fetch(`/api/parks/${park.id}`, {
+        method: 'DELETE'
+      })
+      const deletedPark = await result.json()
+
+    } catch (error) {
+
+    }
   }
-}
 
   if (!park) return <div>Loading...</div>;
 
   return (
 
-    <div>
+    <div className='park-details'>
+
       <h1>{park.name}</h1>
       <img src={park.image} alt={park.name} />
-      <p>State: {park.state}</p>
-      <p>Description: {park.description}</p>
-      <p>Contact: {park.contact}</p>
-      <p>Hours: {park.hours}</p>
+      <div>
+        <p>State: {park.state}</p>
+        <p>Description: {park.description}</p>
+        <p>Contact: {park.contact}</p>
+        <p>Hours: {park.hours}</p>
+      </div>
+
       <span>Tags: </span>
       {
         park.Tag.length > 0 &&
@@ -82,19 +85,18 @@ const handleDelete = async()=>{
       {
         isAdmin &&
         <div className="admin-card">
-        <h4>Logged in as Admin</h4>
-        <label>Edit park:</label><br />
-        <button onClick={() => setShowEditPark(true)}>click here</button>
-        {
-          showEditPark &&
-         <EditPark 
-         park={park}
-         setPark={setPark}
-         setShowEditPark={setShowEditPark}
-         />
-        }
-        <button onClick={handleDelete}>delete park</button>
-      </div>
+          <h4>Logged in as Admin</h4>
+          <button onClick={() => setShowEditPark(true)}>edit park</button>
+          {
+            showEditPark &&
+            <EditPark
+              park={park}
+              setPark={setPark}
+              setShowEditPark={setShowEditPark}
+            />
+          }
+          <button onClick={handleDelete}>delete park</button>
+        </div>
       }
       <button onClick={() => setShowReviewForm(true)}>Leave a Review</button>
       {
@@ -108,53 +110,56 @@ const handleDelete = async()=>{
 
       }
       <h2> Reviews </h2>
-      {
-        park.Review.length > 0 ?
-          park.Review.map(review => {
-            return (
-              <div className='park-review'>
-                <h4>{review.title}</h4>
-                <p>{review.content}</p>
-                <p>rating: {review.stars} out of 5 stars</p>
-                <p>review by {review.user.username}</p>
-                <h5>Comments on this review:</h5>
-                {
-                  review.Comment.length > 0 ?
-                    review.Comment.map(comment => {
-                      return (
-                        <>
-                          <p>{comment.content}</p>
-                          <p>comment by user: {comment.user.username}</p>
+      <div className='review-container'>
+        {
+          park.Review.length > 0 ?
+            park.Review.map(review => {
+              return (
+                <div className='user-post'>
+                  <h4>{review.title}</h4>
+                  <p>{review.content}</p>
+                  <p><span className='park-info'>rating: </span> {review.stars} out of 5 stars</p>
+                  <p> <span className='park-info'>review by </span> {review.user.username}</p>
+                  <h5 className='park-info'>Comments on this review:</h5>
+                  {
+                    review.Comment.length > 0 ?
+                      review.Comment.map(comment => {
+                        return (
+                          <div className='user-post'>
+                            <p>{comment.content}</p>
+                            <p className='park-info'>comment by user: {comment.user.username}</p>
 
-                        </>
-                      )
-                    }) :
-                    <>
-                      <p>no comments for this review yet</p>
-                    </>
-                }
-                {
-                  token &&
-                  <button onClick={() => setShowCommentForm(review.id)}>Leave a comment</button>
-                }
-                {
-                  showCommentForm === review.id &&
-                  < CommentForm
-                    review={review}
-                    setPark={setPark}
-                    setShowCommentForm={setShowCommentForm}
-                    token={token}
-                  />
-                }
-              </div>
-            )
-          }) :
-          <>
-            <p>No Reviews for this park yet</p>
-          </>
-      }
+                          </div>
+                        )
+                      }) :
+                      <>
+                        <p className='park-info'>no comments for this review yet</p>
+                      </>
+                  }
+                  {
+                    token &&
+                    <button onClick={() => setShowCommentForm(review.id)}>Leave a comment</button>
+                  }
+                  {
+                    showCommentForm === review.id &&
+                    < CommentForm
+                      review={review}
+                      setPark={setPark}
+                      setShowCommentForm={setShowCommentForm}
+                      token={token}
+                    />
+                  }
+                </div>
+              )
+            }) :
+            <>
+              <p className='park-info'>No Reviews for this park yet</p>
+            </>
+        }
 
+      </div>
     </div>
+
 
   );
 
