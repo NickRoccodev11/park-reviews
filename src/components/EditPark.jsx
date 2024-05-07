@@ -17,7 +17,7 @@ const EditPark = ({ park, setPark, setShowEditPark }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const result = await fetch('api/parks/:id', {
+      const result = await fetch(`api/parks/${park.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
