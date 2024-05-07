@@ -40,7 +40,7 @@ const getParkDetails = async (id) => {
 
 const createPark = async (name, description, contact, state, image, hours) => {
   try {
-    const newPark = prisma.park.create({
+    const newPark = await prisma.park.create({
       data: {
         name,
         description,
@@ -50,7 +50,18 @@ const createPark = async (name, description, contact, state, image, hours) => {
         hours,
       },
     });
-    return newPark;
+    console.log(newPark)
+    const id = newPark.id;
+    const newParkWithReviews = await prisma.park.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        Review: true,
+        Tag: true,
+      },
+    });
+    return newParkWithReviews;
   } catch (error) {
     console.error(error);
   }
