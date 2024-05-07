@@ -66,6 +66,15 @@ router.put("/parks/:id", async (req, res) => {
   }
 });
 
+router.delete('/parks/:id', async(req,res)=>{
+  try {
+    const deletedPark = await deletePark(parseInt(req.params.id));
+    res.status(200).send(deletedPark)
+  } catch (error) {
+    
+  }
+})
+
 router.post("/reviews", async (req, res) => {
   if (req.user) {
     try {

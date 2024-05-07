@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-//todo: average rating not updating correctly
-//if you make a new park, it won't load because it doesn't have comments or reviews
 const SinglePark = ({ park }) => {
   const navigate = useNavigate()
   const [averageRating, setAverageRating] = useState(0)
