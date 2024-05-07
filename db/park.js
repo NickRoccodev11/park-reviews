@@ -14,11 +14,19 @@ const getParkDetails = async (id) => {
     const parkDetails = await prisma.park.findUnique({
       where: {
         id: parseInt(id),
-      }, 
+      },
       include: {
-        Review: true,
-        
-      }
+        Review: {
+          include: {
+            Comment: {
+              include: {
+                review: true,
+                user: true,
+              },
+            },
+          },
+        },
+      },
     });
     return parkDetails;
   } catch (error) {
@@ -27,37 +35,35 @@ const getParkDetails = async (id) => {
   }
 };
 
-const createPark = async (
-  name, description, contact, state, image, hours
-) => {
-   try {
+const createPark = async (name, description, contact, state, image, hours) => {
+  try {
     const newPark = prisma.park.create({
-      data:{
+      data: {
         name,
         description,
-        contact, 
-        state, 
-        image, 
-        hours
-      }
-    })
+        contact,
+        state,
+        image,
+        hours,
+      },
+    });
     return newPark;
-   } catch (error) {
-    console.error(error);    
-   }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const createReview = async (title, content, stars, user_id, park_id) => {
   try {
     const newReview = await prisma.review.create({
-      data:{
-        title, 
-        content, 
-        stars, 
-        user_id, 
-        park_id
-      }
-    }) 
+      data: {
+        title,
+        content,
+        stars,
+        user_id,
+        park_id,
+      },
+    });
     return newReview;
   } catch (error) {
     console.error(error);
@@ -68,5 +74,5 @@ module.exports = {
   getAllParks,
   getParkDetails,
   createPark,
-  createReview
+  createReview,
 };
