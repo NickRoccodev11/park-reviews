@@ -1,8 +1,17 @@
-# React + Vite
+#Rate-A-Park
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Rate-A-Park is a fullstack application utilizing CRUD operations to allow users to leave reviews, ratings and comments on different National Parks.
 
-Currently, two official plugins are available:
+Park data comes from the National Park Service API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-Login or Register as a new user
+
+-Use the search function to browse or find a park you've visited 
+
+-Logged in users may leave comments, reviews, and ratings. They also may visit their profile to edit/delete their reviews
+
+-Admin capabilities include viewing all users and editing park information
+
+-Implements bcrypt and JSON web-tokens for session security
+
+Deployment: https://park-reviews-uw84.onrender.com/
